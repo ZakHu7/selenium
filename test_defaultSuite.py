@@ -30,7 +30,10 @@ class TestDefaultSuite():
     with open('cookie.txt') as f:
       d = f.read()
       data = ast.literal_eval(d)
-      for l in data:
+      # for l in data:
+      #   self.driver.add_cookie(l)
+      for i in range(2):
+        l = data[i]
         self.driver.add_cookie(l)
  
     # self.driver.add_cookie({'domain': 'warrior.uwaterloo.ca', 'httpOnly': True, 'name': '.AspNet.ApplicationCookie', 'path': '/', 'secure': True, 'value': '3tHL3_hJKQDnV0VSQHIBU6xN96F74K9V2n7f9FsKIi2RB7kW41pxxFsJT7Mm2fHZtgHgg6TI4d2djiaxZ_Fzgj1MAioqTLNAOBnHKh1SwYKFWm-hmw0HxbJlVT-C35rW7VGpVTl2H7l66rLNSs6VXSo6vh-n6zcTW3KIgkXNHd770kIiXZko_XCKi-NKi9Wqs0PTzeTSfCiurGKR5GwEHDs3t_T9vEFzlcLqA4Uf1IfxsCatpWF9rTZKEjl1bokfqrpn2mewxNW96dDGkaEUX8KBevbsGrRInv0B0TfRpQO958e3UTqx5wB8DYXxQJVD9SJB_fVDL5JzZoSgp_MuHfYzDmCSur4axdTXwDg1dKCpot24fu_Myd7mXROtw-IW'})
@@ -46,19 +49,30 @@ class TestDefaultSuite():
     self.driver.set_window_size(1920, 1050)
     
     self.driver.find_element_by_id('loginLink').click()
-    WebDriverWait(self.driver, 30000).until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, ".btn-soundcloud")))
-    self.driver.find_element(By.CSS_SELECTOR, ".btn-soundcloud").click()
+    # WebDriverWait(self.driver, 30000).until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, ".btn-soundcloud")))
+    # self.driver.find_element(By.CSS_SELECTOR, ".btn-soundcloud").click()
+    while True:
+      try:
+        #code with possible error
+        self.driver.find_element(By.CSS_SELECTOR, ".btn-soundcloud").click()
+      except:
+        continue
+      else:
+        #the rest of the code
+        break
     # 3 | waitForElementPresent | css=.col-lg-3:nth-child(1) .img-responsive | 30000
-    WebDriverWait(self.driver, 30000).until(expected_conditions.presence_of_element_located((By.CSS_SELECTOR, ".col-lg-3:nth-child(1) .img-responsive")))
+    WebDriverWait(self.driver, 30000).until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, ".col-lg-3:nth-child(1) .img-responsive")))
     # # 4 | click | css=.col-lg-3:nth-child(1) .img-responsive | 
     # self.driver.find_element(By.CSS_SELECTOR, ".col-lg-3:nth-child(1) .img-responsive").click()
     # # 5 | click | css=.list-group-item:nth-child(3) .img-thumbnail | 
     # self.driver.find_element(By.CSS_SELECTOR, ".list-group-item:nth-child(3) .img-thumbnail").click()
-    self.driver.get('https://warrior.uwaterloo.ca/Program/GetProgramDetails?courseId=cc2a16d7-f148-461e-831d-7d4659726dd1&semesterId=26de9ca7-b227-429c-b21f-633b4cb4c462')
+    # self.driver.get('https://warrior.uwaterloo.ca/Program/GetProgramDetails?courseId=cc2a16d7-f148-461e-831d-7d4659726dd1&semesterId=26de9ca7-b227-429c-b21f-633b4cb4c462')
+    self.driver.get('https://warrior.uwaterloo.ca/Program/GetProgramDetails?courseId=8e62544e-fe09-4953-8a45-1d26d0ff94f2&semesterId=26de9ca7-b227-429c-b21f-633b4cb4c462')
     # 6 | click | css=div:nth-child(4) > .btn-primary | 
     while True:
       try:
         #code with possible error
+        time.sleep(0.2)
         self.driver.find_element(By.CSS_SELECTOR, "div:nth-child(4) > .btn-primary").click()
       except:
         self.driver.get('https://warrior.uwaterloo.ca/Program/GetProgramDetails?courseId=cc2a16d7-f148-461e-831d-7d4659726dd1&semesterId=26de9ca7-b227-429c-b21f-633b4cb4c462')
@@ -66,8 +80,17 @@ class TestDefaultSuite():
       else:
         #the rest of the code
         break
-    # 7 | click | id=btnAccept | 
-    self.driver.find_element(By.ID, "btnAccept").click()
+    
+    WebDriverWait(self.driver, 30000).until(expected_conditions.element_to_be_clickable((By.ID, "btnAccept")))
+    while True:
+      try:
+        # 7 | click | id=btnAccept | 
+        self.driver.find_element(By.ID, "btnAccept").click()
+      except:
+        continue
+      else:
+        #the rest of the code
+        break
     # 8 | click | id=rbtnNo | 
     self.driver.find_element(By.ID, "rbtnNo").click()
     # 9 | click | css=.panel:nth-child(21) > .panel-body | 
@@ -93,7 +116,11 @@ class TestDefaultSuite():
     # 19 | click | css=.panel:nth-child(63) .radio-inline:nth-child(3) | 
     self.driver.find_element(By.CSS_SELECTOR, ".panel:nth-child(63) .radio-inline:nth-child(3)").click()
     # 20 | click | css=.container-fluid > .btn-primary | 
+    time.sleep(10)
     self.driver.find_element(By.CSS_SELECTOR, ".container-fluid > .btn-primary").click()
+    # 21 | click | id=checkoutButton | 
+    time.sleep(10)
+    # self.driver.find_element(By.ID, "checkoutButton").click()
   
 t = TestDefaultSuite()
 t.setup_method(None)
