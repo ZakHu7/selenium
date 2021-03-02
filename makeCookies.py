@@ -37,13 +37,13 @@ time.sleep(1)
 driver.find_element_by_name('dampen_choice').click()
 driver.find_element_by_xpath('//*[@id="auth_methods"]/fieldset/div[1]/button').click()
                                             
-time.sleep(10)            
+time.sleep(290)     
 
 driver.get('https://warrior.uwaterloo.ca/Program/GetProgramDetails?courseId=cc2a16d7-f148-461e-831d-7d4659726dd1&semesterId=26de9ca7-b227-429c-b21f-633b4cb4c462')
 # driver.get('https://warrior.uwaterloo.ca/Program/GetProgramDetails?courseId=8e62544e-fe09-4953-8a45-1d26d0ff94f2&semesterId=26de9ca7-b227-429c-b21f-633b4cb4c462')
 
 # 6 | click | css=div:nth-child(4) > .btn-primary | 
-while True:
+for _ in range(100):
   try:
     #code with possible error
     time.sleep(0.2)
@@ -56,7 +56,7 @@ while True:
     break
 
 WebDriverWait(driver, 30000).until(expected_conditions.element_to_be_clickable((By.ID, "btnAccept")))
-while True:
+for _ in range(100):
   try:
     # 7 | click | id=btnAccept | 
     driver.find_element(By.ID, "btnAccept").click()
